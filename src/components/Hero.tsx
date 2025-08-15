@@ -71,7 +71,7 @@ export function Hero() {
         <FloatingPaths position={-1} />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="text-center max-w-4xl mx-auto">
           {/* Glass Background Container */}
           <div className="relative backdrop-blur-md bg-blue-500/20 rounded-3xl border border-blue-300/40 shadow-xl p-8 sm:p-12 lg:p-16">
@@ -93,7 +93,7 @@ export function Hero() {
             mounted ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-4"
           )}>
             Advanced analytics for Ireland&apos;s environmental network. 
-            <span className="text-blue-600 font-semibold"> 37+ organizations</span>, 
+            <span className="text-blue-600 font-semibold"> 41 organizations</span>, 
             <span className="text-purple-600 font-semibold"> 6 key topics</span>, 
             <span className="text-indigo-600 font-semibold"> infinite insights</span>.
           </p>

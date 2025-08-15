@@ -151,8 +151,8 @@ export function ResearchForm() {
         };
       } else {
         // Add if not selected, but check limits
-        if (field === 'organizations' && currentList.length >= 9) {
-          // Don't allow more than 9 organizations
+        if (field === 'organizations' && currentList.length >= 6) {
+          // Don't allow more than 6 organizations
           return prev;
         }
         
@@ -208,7 +208,7 @@ export function ResearchForm() {
           <label className="block text-2xl font-semibold text-ien-navy">
             Select Organizations
             <span className="text-ien-coral ml-1">*</span>
-            <span className="text-base font-normal text-ien-charcoal/70 ml-2">(max 9)</span>
+            <span className="text-base font-normal text-ien-charcoal/70 ml-2">(max 6)</span>
           </label>
           <p className="text-lg text-ien-charcoal/60 mb-4">
             Choose from all {organizations.length} Irish Environmental Network members
@@ -220,11 +220,11 @@ export function ResearchForm() {
                 key={org.id}
                 type="button"
                 onClick={() => toggleSelection(org.id, 'organizations')}
-                disabled={!formData.organizations.includes(org.id) && formData.organizations.length >= 9}
+                disabled={!formData.organizations.includes(org.id) && formData.organizations.length >= 6}
                 className={cn(
                   "card-selectable text-left p-3 transition-opacity",
                   formData.organizations.includes(org.id) && "card-selected",
-                  !formData.organizations.includes(org.id) && formData.organizations.length >= 9 && "opacity-50 cursor-not-allowed"
+                  !formData.organizations.includes(org.id) && formData.organizations.length >= 6 && "opacity-50 cursor-not-allowed"
                 )}
               >
                 <div className="flex items-start justify-between">
@@ -250,10 +250,10 @@ export function ResearchForm() {
           
           <div className={cn(
             "text-lg font-medium",
-            formData.organizations.length >= 9 ? "text-ien-coral" : "text-ien-teal"
+            formData.organizations.length >= 6 ? "text-ien-coral" : "text-ien-teal"
           )}>
-            {formData.organizations.length}/9 organization{formData.organizations.length !== 1 ? 's' : ''} selected
-            {formData.organizations.length >= 9 && (
+            {formData.organizations.length}/6 organization{formData.organizations.length !== 1 ? 's' : ''} selected
+            {formData.organizations.length >= 6 && (
               <span className="block text-sm text-ien-coral/80 mt-1">
                 Maximum limit reached
               </span>

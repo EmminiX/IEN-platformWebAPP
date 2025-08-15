@@ -1,0 +1,21 @@
+{
+  "name": "IEN Research Intelligence Platform",
+  "short_name": "IEN Research",
+  "description": "Advanced analytics for Ireland's environmental network - 41 organizations, 6 key topics, infinite insights",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-IE",
+  "dir": "ltr",
+  "categories": ["education", "government", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
