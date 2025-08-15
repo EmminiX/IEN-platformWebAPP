@@ -48,8 +48,10 @@ docker compose -f docker-compose.dev.yml up -d
 ```
 src/
 ├── app/                 # Next.js App Router pages
-│   ├── layout.tsx       # Root layout with Geist fonts
+│   ├── layout.tsx       # Root layout with Geist fonts + SEO metadata
 │   ├── page.tsx         # Home page with Hero + Research Form
+│   ├── robots.ts        # Dynamic robots.txt generation
+│   ├── sitemap.ts       # Dynamic XML sitemap generation
 │   ├── privacy/         # Privacy policy page
 │   └── terms/          # Terms of use page
 ├── components/          # React components
@@ -59,6 +61,11 @@ src/
 └── lib/
     ├── data.ts          # Organization and topic data (41 orgs, 6 topics)
     └── utils.ts         # Utility functions and helpers
+
+public/
+├── social-media.jpg     # Social sharing image (1200x630)
+├── manifest.json        # PWA configuration
+└── [other assets]
 ```
 
 ### Key Components
@@ -70,7 +77,7 @@ src/
 - Responsive stats display (41 orgs, 6 topics, ∞ insights)
 
 **Research Form** (`src/components/ResearchForm.tsx`):
-- Multi-step form with organization selection (max 6)
+- Multi-step form with organization selection (max 9)
 - Topic selection with descriptions and icons
 - Timeframe selection (30 days, 3 months, 6 months)
 - Email validation and submission to n8n webhook
@@ -91,7 +98,7 @@ src/
 - Semantic colors for success, warning, error, and info states
 
 **Typography**:
-- Primary: Lexend (from Google Fonts) with Inter fallback
+- Primary: Geist Sans with Geist Mono (preloaded fonts)
 - Strict line-height ratios (1.7 for body, 1.3 for headings)
 - 8px grid system for consistent spacing
 
@@ -138,7 +145,7 @@ The research form submits to an n8n webhook at `https://n8n.emmi.zone/webhook/11
 - Validate all inputs with Zod schemas
 - Provide clear error messaging with recovery instructions
 - Implement loading states for better UX
-- Follow the established selection patterns (max 6 organizations)
+- Follow the established selection patterns (max 9 organizations)
 
 ### Responsive Design
 - Mobile-first approach with Tailwind responsive utilities
@@ -166,6 +173,23 @@ Organizations and topics are statically defined in `src/lib/data.ts`. When addin
 4. Update the total count in Hero component if needed
 
 Topic modifications require updating both the data structure and any dependent UI elements that reference topic counts or specific topic IDs.
+
+## SEO and Social Media
+
+The application includes comprehensive SEO optimization:
+
+### Metadata Features
+- Open Graph and Twitter Card metadata for social sharing
+- Dynamic robots.txt generation (`src/app/robots.ts`)
+- XML sitemap generation (`src/app/sitemap.ts`)
+- PWA manifest for mobile app capabilities
+- Social media image optimization (1200x630px `social-media.jpg`)
+
+### SEO Configuration
+- Irish locale targeting (`en_IE`)
+- Environmental keywords optimization
+- Structured data for search engines
+- Performance-optimized metadata loading
 
 ## Deployment
 
