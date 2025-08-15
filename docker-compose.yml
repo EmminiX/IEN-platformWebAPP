@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # IEN Research Intelligence Platform - Production with Traefik
+  ien-platform:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ien-research-platform
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+    networks:
+      - traefik
+    healthcheck:
+      test: ["CMD", "node", "--version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:noexec,nosuid,size=100m
+      - /app/.next/cache:noexec,nosuid,size=100m
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+    labels:
+      # Traefik configuration
+      - "traefik.enable=true"
+      - "traefik.http.routers.ien-research.rule=Host(`ien-research.yourdomain.com`)"  # Update with your domain
+      - "traefik.http.routers.ien-research.entrypoints=websecure"
+      - "traefik.http.routers.ien-research.tls.certresolver=letsencrypt"
+      - "traefik.http.services.ien-research.loadbalancer.server.port=3000"
+      
+      # Security headers via Traefik
+      - "traefik.http.middlewares.ien-security.headers.frameDeny=true"
+      - "traefik.http.middlewares.ien-security.headers.contentTypeNosniff=true"
+      - "traefik.http.middlewares.ien-security.headers.browserXssFilter=true"
+      - "traefik.http.middlewares.ien-security.headers.referrerPolicy=strict-origin-when-cross-origin"
+      - "traefik.http.middlewares.ien-security.headers.stsSeconds=31536000"
+      - "traefik.http.middlewares.ien-security.headers.stsIncludeSubdomains=true"
+      
+      # Rate limiting
+      - "traefik.http.middlewares.ien-ratelimit.ratelimit.burst=20"
+      - "traefik.http.middlewares.ien-ratelimit.ratelimit.average=10"
+      
+      # Apply middlewares
+      - "traefik.http.routers.ien-research.middlewares=ien-security@docker,ien-ratelimit@docker"
+      
+      # HTTP to HTTPS redirect
+      - "traefik.http.routers.ien-research-http.rule=Host(`ien-research.yourdomain.com`)"  # Update with your domain
+      - "traefik.http.routers.ien-research-http.entrypoints=web"
+      - "traefik.http.routers.ien-research-http.middlewares=redirect-to-https@docker"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      
+      # Project labels
+      - "com.docker.compose.project=ien-research"
+      - "com.docker.compose.service=ien-platform"
+
+networks:
+  traefik:
+    external: true

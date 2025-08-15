@@ -1,0 +1,78 @@
+version: '3.8'
+
+# Development configuration for local development
+# Use: docker-compose -f docker-compose.dev.yml up
+
+services:
+  # IEN Research Intelligence Platform - Development
+  ien-platform-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder  # Stop at builder stage for faster development builds
+    container_name: ien-research-dev
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      # Add any development-specific environment variables here
+    ports:
+      - "3000:3000"  # Direct port mapping for local access
+    volumes:
+      # Mount source code for hot reloading (optional)
+      - ./src:/app/src:cached
+      - ./public:/app/public:cached
+      - ./package.json:/app/package.json:ro
+      - ./next.config.js:/app/next.config.js:ro
+      - ./tailwind.config.ts:/app/tailwind.config.ts:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+      # Exclude node_modules and .next from volume mounting
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - ien-dev
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.docker.compose.project=ien-research-dev"
+      - "com.docker.compose.service=ien-platform-dev"
+
+  # Optional: Local database for development (if needed)
+  # postgres-dev:
+  #   image: postgres:15-alpine
+  #   container_name: ien-postgres-dev
+  #   restart: unless-stopped
+  #   environment:
+  #     - POSTGRES_DB=ien_research_dev
+  #     - POSTGRES_USER=ien_user
+  #     - POSTGRES_PASSWORD=dev_password_change_me
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_dev_data:/var/lib/postgresql/data
+  #   networks:
+  #     - ien-dev
+
+  # Optional: Redis for caching (if needed)
+  # redis-dev:
+  #   image: redis:7-alpine
+  #   container_name: ien-redis-dev
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - ien-dev
+
+networks:
+  ien-dev:
+    driver: bridge
+
+# volumes:
+#   postgres_dev_data:
+#     driver: local

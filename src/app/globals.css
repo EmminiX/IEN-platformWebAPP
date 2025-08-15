@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* IEN Research Intelligence Platform - Atlantic Tech Design System */
+
+@layer base {
+  :root {
+    --background: #fafafa;
+    --foreground: #2d3748;
+    --card: #ffffff;
+    --card-foreground: #2d3748;
+    --primary: #1a365d;
+    --primary-foreground: #ffffff;
+    --secondary: #a7f3d0;
+    --secondary-foreground: #1a365d;
+    --muted: #f5f5f5;
+    --muted-foreground: #475569;
+    --accent: #2dd4bf;
+    --accent-foreground: #1a365d;
+    --destructive: #ff6b6b;
+    --destructive-foreground: #ffffff;
+    --border: #e5e5e5;
+    --input: #ffffff;
+    --ring: #2dd4bf;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Lexend', 'Inter', system-ui, sans-serif;
+    line-height: 1.7;
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.3;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-ien-navy text-white hover:opacity-90 focus:opacity-90 
+           shadow-lg hover:shadow-xl active:scale-95 
+           transition-all duration-200 font-medium rounded-lg px-8 py-4
+           text-base;
+  }
+  
+  .btn-accent {
+    @apply bg-ien-coral text-white hover:opacity-90
+           shadow-lg hover:shadow-xl active:scale-95
+           transition-all duration-200 font-medium rounded-lg px-6 py-3;
+  }
+  
+  .input-modern {
+    @apply border-2 border-gray-200 bg-white px-4 py-3 rounded-lg
+           focus:border-ien-teal focus:ring-4 focus:ring-ien-teal/20
+           placeholder:text-gray-500 transition-all duration-200
+           text-base font-medium;
+  }
+  
+  .card-selectable {
+    @apply cursor-pointer border-2 border-gray-200 bg-white p-4 rounded-lg
+           hover:border-ien-teal hover:shadow-lg
+           transition-all duration-200 select-none;
+  }
+  
+  .card-selected {
+    @apply border-ien-teal shadow-lg;
+    background-color: rgba(45, 212, 191, 0.05);
+  }
+
+
+}
