@@ -31,15 +31,23 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Irish Environmental Network" }],
   creator: "Irish Environmental Network",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: "/",
+  },
   
   // Open Graph for social media
   openGraph: {
+    type: "website",
+    siteName: "IEN Research Intelligence Platform",
     title: "IEN Research Platform | Irish Environmental Network",
     description: "AI-powered environmental research platform for Ireland. Access analytics from 41 organizations across 6 key topics.",
     url: "/",
-    siteName: "IEN Research Intelligence Platform",
     locale: "en_IE",
-    type: "website",
     images: [
       {
         url: "/social-media.jpg",
@@ -54,11 +62,21 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: "summary_large_image",
-    site: "@IEN_Ireland",
-    creator: "@IEN_Ireland",
     title: "IEN Research Platform | Irish Environmental Network",
     description: "AI-powered environmental research platform for Ireland. Access analytics from 41 organizations.",
     images: ["/social-media.jpg"],
+    creator: "@IEN_Ireland",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
