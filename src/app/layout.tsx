@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://ien-platform.vercel.app"),
   title: {
     default: "IEN Research Platform | Irish Environmental Network",
     template: "%s | IEN Research Intelligence Platform"
@@ -57,10 +58,7 @@ export const metadata: Metadata = {
     creator: "@IEN_Ireland",
     title: "IEN Research Platform | Irish Environmental Network",
     description: "AI-powered environmental research platform for Ireland. Access analytics from 41 organizations.",
-    images: {
-      url: "/social-media.jpg",
-      alt: "IEN Research Intelligence Platform - Advanced analytics for Ireland's environmental network",
-    },
+    images: ["/social-media.jpg"],
   },
 };
 
@@ -70,9 +68,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-IE">
+      <head>
+        {/* Social Media Image Metadata */}
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:image" content="/social-media.jpg" />
+        
+        {/* Theme color for browser UI */}
+        <meta name="theme-color" content="#1a365d" />
+        <meta name="msapplication-TileColor" content="#1a365d" />
+        
+        {/* Performance hints */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning={true}
       >
         {children}
       </body>
