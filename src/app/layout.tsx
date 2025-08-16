@@ -50,9 +50,9 @@ export const metadata: Metadata = {
     locale: "en_IE",
     images: [
       {
-        url: "/social-media.jpg",
+        url: "https://ien.emmi.zone/social-media.jpg",
         width: 1200,
-        height: 630,
+        height: 627,
         alt: "IEN Research Intelligence Platform - Advanced analytics for Ireland's environmental network",
         type: "image/jpeg",
       }
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "IEN Research Platform | Irish Environmental Network",
     description: "AI-powered environmental research platform for Ireland. Access analytics from 41 organizations.",
-    images: ["/social-media.jpg"],
+    images: ["https://ien.emmi.zone/social-media.jpg"],
     creator: "@IEN_Ireland",
   },
   robots: {
@@ -88,11 +88,16 @@ export default function RootLayout({
   return (
     <html lang="en-IE">
       <head>
-        {/* Social Media Image Metadata */}
+        {/* Critical Open Graph Meta Tags for LinkedIn */}
+        <meta property="og:image" content="https://ien.emmi.zone/social-media.jpg" />
+        <meta property="og:image:secure_url" content="https://ien.emmi.zone/social-media.jpg" />
+        <meta property="og:image:alt" content="IEN Research Intelligence Platform - Advanced analytics for Ireland's environmental network" />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:image" content="/social-media.jpg" />
+        <meta property="og:image:height" content="627" />
+        
+        {/* Twitter Image Meta Tags */}
+        <meta name="twitter:image" content="https://ien.emmi.zone/social-media.jpg" />
         
         {/* Theme color for browser UI */}
         <meta name="theme-color" content="#1a365d" />
