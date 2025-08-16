@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://ien-platform.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_WEBSITE_URL || "https://ien.emmi.zone"),
   title: {
     default: "IEN Research Platform | Irish Environmental Network",
     template: "%s | IEN Research Intelligence Platform"
