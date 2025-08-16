@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_WEBSITE_URL || "https://ien.emmi.zone"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://ien.emmi.zone"),
   title: {
     default: "IEN Research Platform | Irish Environmental Network",
     template: "%s | IEN Research Intelligence Platform"
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     locale: "en_IE",
     images: [
       {
-        url: "https://ien.emmi.zone/social-media.jpg",
+        url: "https://ien.emmi.zone/linkedin-image.jpg",
         width: 1200,
         height: 627,
         alt: "IEN Research Intelligence Platform - Advanced analytics for Ireland's environmental network",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "IEN Research Platform | Irish Environmental Network",
     description: "AI-powered environmental research platform for Ireland. Access analytics from 41 organizations.",
-    images: ["https://ien.emmi.zone/social-media.jpg"],
+    images: ["https://ien.emmi.zone/linkedin-image.jpg"],
     creator: "@IEN_Ireland",
   },
   robots: {
@@ -88,16 +88,17 @@ export default function RootLayout({
   return (
     <html lang="en-IE">
       <head>
-        {/* Critical Open Graph Meta Tags for LinkedIn */}
-        <meta property="og:image" content="https://ien.emmi.zone/social-media.jpg" />
-        <meta property="og:image:secure_url" content="https://ien.emmi.zone/social-media.jpg" />
-        <meta property="og:image:alt" content="IEN Research Intelligence Platform - Advanced analytics for Ireland's environmental network" />
+        {/* LinkedIn-specific metadata for maximum compatibility */}
+        <meta property="og:image" content="https://ien.emmi.zone/linkedin-image.jpg" />
+        <meta property="og:image:secure_url" content="https://ien.emmi.zone/linkedin-image.jpg" />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="627" />
-        
-        {/* Twitter Image Meta Tags */}
-        <meta name="twitter:image" content="https://ien.emmi.zone/social-media.jpg" />
+        <meta property="og:url" content="https://ien.emmi.zone" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="IEN Research Intelligence Platform" />
+        <meta name="twitter:image" content="https://ien.emmi.zone/linkedin-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
         
         {/* Theme color for browser UI */}
         <meta name="theme-color" content="#1a365d" />
