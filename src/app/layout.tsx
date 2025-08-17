@@ -107,6 +107,9 @@ export default function RootLayout({
         {/* Performance hints */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Plausible Analytics */}
+        <script defer data-domain="ien.emmi.zone" src="https://plausible.emmi.zone/js/script.js"></script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
